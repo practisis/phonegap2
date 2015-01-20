@@ -40,6 +40,7 @@ var app = {
         //aqui codigo de ondevide ready para empezar a hacer cosas.
     },
     escanear: function(){
+        
         resultDiv = document.querySelector("#results");
         cordova.plugins.barcodeScanner.scan(
 		function (result) {
