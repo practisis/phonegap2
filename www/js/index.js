@@ -37,13 +37,21 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
+        //aqui codigo de ondevide ready para empezar a hacer cosas.
+    },
+    escanear: function(){
+        resultDiv = document.querySelector("#results");
+        cordova.plugins.barcodeScanner.scan(
+		function (result) {
+			var s = "Result: " + result.text + "<br/>" +
+			"Format: " + result.format + "<br/>" +
+			"Cancelled: " + result.cancelled;
+			resultDiv.innerHTML = s;
+		}, 
+		function (error) {
+			alert("Scanning failed: " + error);
+		}
+	);
+        
     }
 };
