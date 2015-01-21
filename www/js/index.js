@@ -40,19 +40,36 @@ var app = {
         //aqui codigo de ondevide ready para empezar a hacer cosas.
     },
     escanear: function(){
-        alert('hola');
         resultDiv = document.querySelector("#results");
         cordova.plugins.barcodeScanner.scan(
 		function (result) {
-			var s = "Result: " + result.text + "<br/>" +
-			"Format: " + result.format + "<br/>" +
-			"Cancelled: " + result.cancelled;
-			resultDiv.innerHTML = s;
+                        //result.text;
+                        ajax("http://104.131.65.202/ticket/validacionmovil.php?id="+result.text);
+			//resultDiv.innerHTML = 'ENTRADA VALIDA';
 		}, 
 		function (error) {
-			alert("Scanning failed: " + error);
+			alert("Error de Scan: " + error);
 		}
 	);
         
     }
 };
+
+function ajax(cadena){var xmlhttp=false;
+/*@cc_on @*/
+/*@if (@_jscript_version >= 5)
+try { xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");} catch (e) {try {xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");} 
+
+catch (E) { xmlhttp = false;}}
+@end @*/
+//console.log(cadena);
+if (!xmlhttp && typeof XMLHttpRequest!='undefined') { try {xmlhttp = new XMLHttpRequest(); } catch (e) { xmlhttp=false;}}
+if (!xmlhttp && window.createRequest) {	try { xmlhttp = window.createRequest();} catch (e) { xmlhttp=false;}}
+xmlhttp.open("GET",cadena,true);
+xmlhttp.onreadystatechange=function() {
+if (xmlhttp.readyState==4){
+	if(xmlhttp.status==200){
+	alert(xmlhttp.responseText);	
+}}} 
+xmlhttp.send(null);
+}
