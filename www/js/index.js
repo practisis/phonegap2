@@ -40,7 +40,7 @@ var app = {
         //aqui codigo de ondevide ready para empezar a hacer cosas.
     },
     escanear: function(){
-        resultDiv = document.querySelector("#results");
+
         cordova.plugins.barcodeScanner.scan(
 		function (result) {
                         //result.text;
@@ -69,6 +69,7 @@ xmlhttp.open("GET",cadena,true);
 xmlhttp.onreadystatechange=function() {
 if (xmlhttp.readyState==4){
 	if(xmlhttp.status==200){
+        //resultDiv = document.querySelector("#results");
 	alert(xmlhttp.responseText);	
 }}} 
 xmlhttp.send(null);
