@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Hello World</name>
+    <name>TodoTicket</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Aplicacion de Registro de Entradas a Eventos.
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="info@practisis.com" href="http://practisis.net">
+        Practisis S.A.
     </author>
     <content src="index.html" />
     <preference name="permissions" value="none" />

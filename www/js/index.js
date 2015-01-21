@@ -40,12 +40,11 @@ var app = {
         //aqui codigo de ondevide ready para empezar a hacer cosas.
     },
     escanear: function(){
-
+        resultDiv = document.querySelector("#results");
+	resultDiv.innerHTML='';
         cordova.plugins.barcodeScanner.scan(
 		function (result) {
-                        //result.text;
                         ajax("http://104.131.65.202/ticket/validacionmovil.php?id="+result.text);
-			//resultDiv.innerHTML = 'ENTRADA VALIDA';
 		}, 
 		function (error) {
 			alert("Error de Scan: " + error);
@@ -69,8 +68,8 @@ xmlhttp.open("GET",cadena,true);
 xmlhttp.onreadystatechange=function() {
 if (xmlhttp.readyState==4){
 	if(xmlhttp.status==200){
-        //resultDiv = document.querySelector("#results");
-	alert(xmlhttp.responseText);	
+        resultDiv = document.querySelector("#results");
+	resultDiv.innerHTML=xmlhttp.responseText;	
 }}} 
 xmlhttp.send(null);
 }
