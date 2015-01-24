@@ -52,10 +52,29 @@
       this.context.save();
       this.context.scale(this.scale,this.scale);
       
-      if (document.getElementById("doTiltLR").value>40){
-        pujaderecha();
-      };
-     
+      //control de tilteo
+      if (document.getElementById("doTiltLR").value>30 && document.getElementById("doTiltLR").value<40){
+        pujaderecha1();
+      }
+     else if (document.getElementById("doTiltLR").value>41 && document.getElementById("doTiltLR").value<55){
+        pujaderecha2();
+      }
+      else if (document.getElementById("doTiltLR").value>56 && document.getElementById("doTiltLR").value){
+        pujaderecha3();
+      }
+      
+      
+      if (document.getElementById("doTiltLR").value<-30 && document.getElementById("doTiltLR").value>-40){
+        pujaizquierda1();
+      }
+     else if (document.getElementById("doTiltLR").value<-41 && document.getElementById("doTiltLR").value>-55){
+        pujaizquierda2();
+      }
+      else if (document.getElementById("doTiltLR").value<-56 && document.getElementById("doTiltLR").value){
+        pujaizquierda3();
+      }
+      
+      
       while(obj) {
         var body = obj.GetUserData();
         if(body) {
@@ -248,8 +267,41 @@
      console.log(jam);
   }
   
+   function pujaizquierda1(){
+    elcubo.ApplyImpulse({ x: -20, y: 0 }, elcubo.GetWorldCenter());
+     jam = elcubo.GetUserData();
+     console.log(jam);
+  }
+  
+   function pujaizquierda2(){
+    elcubo.ApplyImpulse({ x: -40, y: 0 }, elcubo.GetWorldCenter());
+     jam = elcubo.GetUserData();
+     console.log(jam);
+  }
+  
+  function pujaizquierda3(){
+    elcubo.ApplyImpulse({ x: -60, y: 0 }, elcubo.GetWorldCenter());
+     jam = elcubo.GetUserData();
+     console.log(jam);
+  }
+  
     function pujaderecha(){
     elcubo.ApplyImpulse({ x: 80, y: 0 }, elcubo.GetWorldCenter());
+     jam = elcubo.GetUserData();
+     console.log(jam);
+  }
+      function pujaderecha1(){
+    elcubo.ApplyImpulse({ x: 20, y: 0 }, elcubo.GetWorldCenter());
+     jam = elcubo.GetUserData();
+     console.log(jam);
+  }
+      function pujaderecha2(){
+    elcubo.ApplyImpulse({ x: 40, y: 0 }, elcubo.GetWorldCenter());
+     jam = elcubo.GetUserData();
+     console.log(jam);
+  }
+      function pujaderecha3(){
+    elcubo.ApplyImpulse({ x: 60, y: 0 }, elcubo.GetWorldCenter());
      jam = elcubo.GetUserData();
      console.log(jam);
   }
