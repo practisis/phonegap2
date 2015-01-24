@@ -153,8 +153,8 @@
 
   Body.prototype.defaults = {
     shape: "block",
-    width: 1.5,
-    height: 1.5,
+    width: 6,
+    height: 6,
     radius: 1
   };
 
@@ -261,7 +261,16 @@
                           points: [ { x: 0, y: 0 }, { x: 0, y: 4 },{ x: -10, y: 0 } ,{ x: -10, y: -4}  ],
                           x: 10, y: 15 });
 
+                                
+      new Body(physics, { color: "blue", type: "static", shape: "polygon", 
+                          points: [ {x : 7, y : 1},{x : 6, y : 1},{x : 5, y : 1},{x : 5, y : 3}],
+                          x: 10, y: 10 });
+                                                
+                          
       new Body(physics, { image: img, x: 8, y: 0 });
+      
+
+      
       
       physics.click(function(body1) {
         body1.ApplyImpulse({ x: 0, y: -500 }, body1.GetWorldCenter());
