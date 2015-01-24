@@ -33,43 +33,11 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+        //alert("listo");
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        //aqui codigo de ondevide ready para empezar a hacer cosas.
-    },
-    escanear: function(){
-        resultDiv = document.querySelector("#results");
-	resultDiv.innerHTML='';
-        cordova.plugins.barcodeScanner.scan(
-		function (result) {
-                        ajax("http://104.131.65.202/ticket/validacionmovil.php?id="+result.text);
-		}, 
-		function (error) {
-			alert("Error de Scan: " + error);
-		}
-	);
-        
+        //alert("hola");
     }
 };
 
-function ajax(cadena){var xmlhttp=false;
-/*@cc_on @*/
-/*@if (@_jscript_version >= 5)
-try { xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");} catch (e) {try {xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");} 
-
-catch (E) { xmlhttp = false;}}
-@end @*/
-//console.log(cadena);
-if (!xmlhttp && typeof XMLHttpRequest!='undefined') { try {xmlhttp = new XMLHttpRequest(); } catch (e) { xmlhttp=false;}}
-if (!xmlhttp && window.createRequest) {	try { xmlhttp = window.createRequest();} catch (e) { xmlhttp=false;}}
-xmlhttp.open("GET",cadena,true);
-xmlhttp.onreadystatechange=function() {
-if (xmlhttp.readyState==4){
-	if(xmlhttp.status==200){
-        resultDiv = document.querySelector("#results");
-	resultDiv.innerHTML=xmlhttp.responseText;	
-}}} 
-xmlhttp.send(null);
-}
