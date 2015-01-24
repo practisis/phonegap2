@@ -66,7 +66,9 @@
       <table>
         <tr>
           <td>Izq-Der [gamma]</td>
-          <td id="doTiltLR"></td>
+          <td >
+            <input type="text" id="doTiltLR" />
+          </td>
         </tr>
       </table>
   </div>
@@ -86,7 +88,7 @@
       }
     }
     function deviceOrientationHandler(tiltLR, tiltFB, dir) {
-      document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
+      document.getElementById("doTiltLR").value = Math.round(tiltLR);
     }
   </script>
        

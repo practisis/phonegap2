@@ -52,7 +52,9 @@
       this.context.save();
       this.context.scale(this.scale,this.scale);
       
-
+      if (document.getElementById("doTiltLR").value>40){
+        pujaderecha();
+      };
      
       while(obj) {
         var body = obj.GetUserData();
