@@ -31,6 +31,10 @@
     this.world.SetDebugDraw(this.debugDraw);
   };
 
+  
+  var elcubo;
+  var i=0;
+  
   Physics.prototype.step = function(dt) {
     this.dtRemaining += dt;
     while(this.dtRemaining > this.stepAmount) {
@@ -47,22 +51,38 @@
 
       this.context.save();
       this.context.scale(this.scale,this.scale);
+      
+
+     
       while(obj) {
         var body = obj.GetUserData();
-        if(body) {  body.draw(this.context); }
-
+        if(body) {
+          body.draw(this.context);
+        }
+        if (i==0){
+          console.log(body);
+          elcubo=body;
+          i++;
+        }
         obj = obj.GetNext();
       }
+      //var nuevo = obj.GetUserData();
+      //console.log(nuevo);
       this.context.restore();
     }
   };
 
+ 
 
   Physics.prototype.click = function(callback) {
     var self = this;
-
     function handleClick(e) {
       e.preventDefault();
+      
+      //codigo al dar click
+      
+      //codigo al dar click
+      
       var point = {
             x: (e.offsetX || e.layerX) / self.scale,
             y: (e.offsetY || e.layerY) / self.scale
@@ -133,8 +153,8 @@
 
   Body.prototype.defaults = {
     shape: "block",
-    width: 4,
-    height: 4,
+    width: 1.5,
+    height: 1.5,
     radius: 1
   };
 
@@ -218,7 +238,17 @@
     lastFrame = tm;
   };
 
+  
+  function salta(){
+    alert("hola");
+    body.ApplyImpulse({ x: 1000, y: 0 }, body.GetWorldCenter());
+  }
+  
   function init() {
+    //agrego un click al div
+    document.getElementById("miboton").addEventListener("click", salta, false);
+    //agrego un click al div
+    
     var img = new Image();
 
     // Wait for the image to load
@@ -227,31 +257,24 @@
       physics = window.physics = new Physics(document.getElementById("b2dCanvas"));
 
       // Create some walls
-      new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 50,  width: 0.5 });
-      new Body(physics, { color: "red", type: "static", x:51, y: 0, height: 50,  width: 0.5});
-      new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 0.5, width: 120 });
-      new Body(physics, { color: "red", type: "static", x: 0, y:25, height: 0.5, width: 120 });
+      new Body(physics, { color: "red", type: "static", shape: "polygon", 
+                          points: [ { x: 0, y: 0 }, { x: 0, y: 4 },{ x: -10, y: 0 } ,{ x: -10, y: -4}  ],
+                          x: 10, y: 15 });
 
-      new Body(physics, { image: img, x: 5, y: 8 });
-      new Body(physics, { image: img, x: 13, y: 8 });
-      new Body(physics, { color: "blue", x: 8, y: 3 });
-      new Body(physics, { color: "gray", shape: "circle", radius: 4, x: 5, y: 20 });
-
-      new Body(physics, { color: "pink", shape: "polygon", 
-                          points: [ { x: 0, y: 0 }, { x: 0, y: 4 },{ x: -10, y: 0 }   ],
-                          x: 20, y: 5 });
-
-      physics.click(function(body) {
-        body.ApplyImpulse({ x: 1000, y: -1000 }, body.GetWorldCenter());
+      new Body(physics, { image: img, x: 8, y: 0 });
+      
+      physics.click(function(body1) {
+        body1.ApplyImpulse({ x: 0, y: -500 }, body1.GetWorldCenter());
       });
 
       requestAnimationFrame(gameLoop);
     });
 
-    img.src = "img/bricks.jpg";
+    img.src = "img/cube.png";
   }
 
-  window.addEventListener("load",init);
+  window.addEventListener("load",init);  
+ 
 }());
 
 
@@ -285,3 +308,4 @@
         };
     }
 }());
+
