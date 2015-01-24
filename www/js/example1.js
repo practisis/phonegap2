@@ -14,6 +14,7 @@
   var Physics = window.Physics = function(element,scale) {
     var gravity = new b2Vec2(0,9.8);
     this.world = new b2World(gravity, true);
+    this.element = element;
     this.context = element.getContext("2d");
     this.scale = scale || 20;
     this.dtRemaining = 0;
@@ -40,6 +41,19 @@
     }
     if(this.debugDraw) {
       this.world.DrawDebugData();
+    } else {
+      var obj = this.world.GetBodyList();
+      this.context.clearRect(0,0,this.element.width,this.element.height);
+
+      this.context.save();
+      this.context.scale(this.scale,this.scale);
+      while(obj) {
+        var body = obj.GetUserData();
+        if(body) {  body.draw(this.context); }
+
+        obj = obj.GetNext();
+      }
+      this.context.restore();
     }
   }
 
@@ -87,18 +101,19 @@
         details.height = details.height || this.defaults.height;
 
         this.fixtureDef.shape = new b2PolygonShape();
-        this.fixtureDef.shape.SetAsBox(details.width,
-                                       details.height);
+        this.fixtureDef.shape.SetAsBox(details.width/2,
+                                       details.height/2);
         break;
     }
 
     this.body.CreateFixture(this.fixtureDef);
   };
 
+
   Body.prototype.defaults = {
     shape: "block",
-    width: 2,
-    height: 2,
+    width: 4,
+    height: 4,
     radius: 1
   };
 
@@ -119,6 +134,57 @@
   };
 
 
+  Body.prototype.draw = function(context) {
+    var pos = this.body.GetPosition(),
+        angle = this.body.GetAngle();
+
+    context.save();
+    context.translate(pos.x,pos.y);
+    context.rotate(angle);
+
+
+    if(this.details.color) {
+      context.fillStyle = this.details.color;
+
+      switch(this.details.shape) {
+        case "circle":
+          context.beginPath();
+          context.arc(0,0,this.details.radius,0,Math.PI*2);
+          context.fill();
+          break;
+        case "polygon":
+          var points = this.details.points;
+          context.beginPath();
+          context.moveTo(points[0].x,points[0].y);
+          for(var i=1;i<points.length;i++) {
+            context.lineTo(points[i].x,points[i].y);
+          }
+          context.fill();
+          break;
+        case "block":
+          context.fillRect(-this.details.width/2,
+                           -this.details.height/2,
+                           this.details.width,
+                           this.details.height);
+        default:
+          break;
+      }
+    }
+
+    if(this.details.image) {
+      context.drawImage(this.details.image,
+                        -this.details.width/2,
+                        -this.details.height/2,
+                        this.details.width,
+                        this.details.height);
+
+    }
+
+    context.restore();
+
+  }
+
+
   var physics,
       lastFrame = new Date().getTime();
 
@@ -132,20 +198,34 @@
   };
 
   function init() {
-    physics = window.physics = new Physics(document.getElementById("b2dCanvas"));
-    physics.debug();
+    var img = new Image();
 
-    // Create some walls
-    new Body(physics, { type: "static", x: 0, y: 0, height: 25,  width: 0.5 });
-    new Body(physics, { type: "static", x:51, y: 0, height: 25,  width: 0.5});
-    new Body(physics, { type: "static", x: 0, y: 0, height: 0.5, width: 60 });
-    new Body(physics, { type: "static", x: 0, y:25, height: 0.5, width: 60 });
+    // Wait for the image to load
+    img.addEventListener("load", function() {
 
-    window.bdy = new Body(physics, { x: 5, y: 8 });
-    new Body(physics, { x: 13, y: 8 });
-    new Body(physics, { x: 8, y: 3 });
+      physics = window.physics = new Physics(document.getElementById("b2dCanvas"));
 
-    requestAnimationFrame(gameLoop);
+      // Create some walls
+      new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 50,  width: 0.5 });
+      new Body(physics, { color: "red", type: "static", x:51, y: 0, height: 50,  width: 0.5});
+      new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 0.5, width: 120 });
+      new Body(physics, { color: "red", type: "static", x: 0, y:25, height: 0.5, width: 120 });
+      new Body(physics, { color: "red", shape: "polygon", type:"static",
+                          points: [ { x: 0, y: 0 }, { x: 0, y: 4 },{ x: -10, y: 0 }, { x: -8, y: -5 }   ],
+                          x: 10, y: 20 });
+
+      new Body(physics, { image: img, x: 5, y: 8 });
+      new Body(physics, { image: img, x: 13, y: 8 });
+      new Body(physics, { color: "gray", shape: "circle", radius: 4, x: 5, y: 20 });
+
+      new Body(physics, { color: "pink", shape: "polygon", 
+                          points: [ { x: 0, y: 0 }, { x: 0, y: 4 },{ x: -10, y: 0 }   ],
+                          x: 30, y: 5 });
+
+      requestAnimationFrame(gameLoop);
+    });
+
+    img.src = "img/bricks.jpg";
   }
 
   window.addEventListener("load",init);
@@ -182,5 +262,4 @@
         };
     }
 }());
-
 
