@@ -209,7 +209,6 @@
       new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 50,  width: 0.5 });
       new Body(physics, { color: "red", type: "static", x:51, y: 0, height: 50,  width: 0.5});
       new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 0.5, width: 120 });
-      new Body(physics, { color: "red", type: "static", x: 25, y:25, height: 0.5, width: 2 });
       new Body(physics, { color: "red", type: "static", x: 15, y:13, height: 0.5, width: 1 });
       new Body(physics, { color: "red", shape: "polygon", type:"static",
                           points: [ { x: 0, y: 0 }, { x: 0, y: 4 },{ x: -10, y: 0 }, { x: -8, y: -5 }   ],
