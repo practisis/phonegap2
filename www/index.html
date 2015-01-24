@@ -35,34 +35,8 @@
     </head>
     <body>
  <canvas id='b2dCanvas' width='480' height='480'></canvas>
- <div id="miboton">MIBOTON</div>
- <div class="container" style="-webkit-perspective: 300; perspective: 300;">
-    <div id="imgLogo" class="logo"></div>
-  </div>
-  
-  <script type="text/javascript">
-    init();
-    var count = 0;
-    
-    function init() {
-      if (window.DeviceOrientationEvent) {
-        window.addEventListener('deviceorientation', function(eventData) {
-          // gamma es la inclinaci—n de izquierda a derecha
-          var IzqDer = (eventData.gamma);
-          getElementById("miboton").innerHTML=IzqDer;
-          // beta es la inclinaci—n de delante hacia atr‡s en grados, donde frente es positivo
-          var DelanteAtras = eventData.beta;
-          // alpha es la direcci—n de la brœjula del dispositivo se enfrenta en grados
-          var dir = eventData.alpha
-          
-          }, false);
-      } else {
-        alert('No es compatible con el dispositivo o navegador. Lo siento.');
-      }
-    }
-  
-   
-    </script>
+ <div id="mibotonizq">Izquiera</div><div id="mibotonder">Derecha</div>
+ 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">

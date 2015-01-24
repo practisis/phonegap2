@@ -60,8 +60,9 @@
           body.draw(this.context);
         }
         if (i==0){
-          console.log(body);
-          elcubo=body;
+          elcubo=obj;
+          //var body23 = obj.GetUserData();
+          //console.log(body23);
           i++;
         }
         obj = obj.GetNext();
@@ -239,14 +240,22 @@
   };
 
   
-  function salta(){
-    alert("hola");
-    body.ApplyImpulse({ x: 1000, y: 0 }, body.GetWorldCenter());
+  function pujaizquierda(){
+    elcubo.ApplyImpulse({ x: -80, y: 0 }, elcubo.GetWorldCenter());
+     jam = elcubo.GetUserData();
+     console.log(jam);
+  }
+  
+    function pujaderecha(){
+    elcubo.ApplyImpulse({ x: 80, y: 0 }, elcubo.GetWorldCenter());
+     jam = elcubo.GetUserData();
+     console.log(jam);
   }
   
   function init() {
     //agrego un click al div
-    document.getElementById("miboton").addEventListener("click", salta, false);
+    document.getElementById("mibotonizq").addEventListener("click", pujaizquierda, false);
+    document.getElementById("mibotonder").addEventListener("click", pujaderecha, false);
     //agrego un click al div
     
     var img = new Image();
@@ -264,11 +273,11 @@
       
        new Body(physics, { color: "red", type: "static", shape: "polygon", 
                           points: [{x : 24, y : 0.2},{x : 23.85, y : 5.3},{x : 15.3, y : 5.35},{x : 15.3, y : 0} ],
-                          x: -5, y: 5 });
+                          x: -2, y: 5 });
        
        new Body(physics, { color: "red", type: "static", shape: "polygon", 
                           points: [ {x : 23.95, y : 5.35},{x : 23.95, y : 7.85},{x : 13.45, y : 8.3},{x : 15.15, y : 5.15} ],
-                          x: -5, y: 6 });
+                          x: -4, y: 6 });
                                            
                                                 
                           
@@ -278,7 +287,7 @@
       
       
       physics.click(function(body1) {
-        body1.ApplyImpulse({ x: 0, y: -500 }, body1.GetWorldCenter());
+        body1.ApplyImpulse({ x: 0, y: -80 }, body1.GetWorldCenter());
       });
 
       requestAnimationFrame(gameLoop);
