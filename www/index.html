@@ -31,17 +31,64 @@
         <script src='js/Box2dWeb-2.1.a.3.js'></script>
   <script src='js/example1.js'></script>
   <style> canvas { background-color:black; } </style>
+   <style type="text/css">
+    body {
+      font-family: sans-serif;
+    }
+  
+      .main {
+      border: 1px solid black;
+      box-shadow: 10px 10px 5px #888;
+      border-radius: 12px;
+      padding: 20px;
+      background-color: #ddd;
+      margin: 25px;
+      width: 450px;
+      margin-left:auto;
+      margin-right:auto;  
+    }  
+    .container {
+      -webkit-perspective: 300; perspective: 300;
+    }
+  </style>
         
     </head>
     <body>
  <canvas id='b2dCanvas' width='480' height='480'></canvas>
- <div id="mibotonizq">Izquiera</div><div id="mibotonder">Derecha</div>
+ <div id="mibotonizq" style='width:240; height:30px;'>Izquiera</div><div id="mibotonder">Derecha</div>
  
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
+        <div class="main">
+      <table>
+        <tr>
+          <td>Izq-Der [gamma]</td>
+          <td id="doTiltLR"></td>
+        </tr>
+      </table>
+  </div>
+  <script type="text/javascript">
+    init();
+    var count = 0;
+    
+    function init() {
+      if (window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', function(eventData) {
+          var tiltLR = (eventData.gamma);
+          var tiltFB = eventData.beta;
+          var dir = eventData.alpha
+          deviceOrientationHandler(tiltLR, tiltFB, dir);
+          }, false);
+      } else {
+      }
+    }
+    function deviceOrientationHandler(tiltLR, tiltFB, dir) {
+      document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
+    }
+  </script>
        
     </body>
 </html>
