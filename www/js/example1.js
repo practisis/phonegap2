@@ -209,18 +209,19 @@
       new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 50,  width: 0.5 });
       new Body(physics, { color: "red", type: "static", x:51, y: 0, height: 50,  width: 0.5});
       new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 0.5, width: 120 });
-      new Body(physics, { color: "red", type: "static", x: 0, y:25, height: 0.5, width: 120 });
+      new Body(physics, { color: "red", type: "static", x: 25, y:25, height: 0.5, width: 2 });
+      new Body(physics, { color: "red", type: "static", x: 15, y:13, height: 0.5, width: 1 });
       new Body(physics, { color: "red", shape: "polygon", type:"static",
                           points: [ { x: 0, y: 0 }, { x: 0, y: 4 },{ x: -10, y: 0 }, { x: -8, y: -5 }   ],
                           x: 10, y: 20 });
 
-      new Body(physics, { image: img, x: 5, y: 8 });
-      new Body(physics, { image: img, x: 13, y: 8 });
-      new Body(physics, { color: "gray", shape: "circle", radius: 4, x: 5, y: 20 });
+      new Body(physics, { image: img, x: 5, y: 10 });
+      new Body(physics, { image: img, x: 13, y: 0 });
+      new Body(physics, { color: "gray", shape: "circle", radius: 1, x: 5, y: 5 });
 
       new Body(physics, { color: "pink", shape: "polygon", 
                           points: [ { x: 0, y: 0 }, { x: 0, y: 4 },{ x: -10, y: 0 }   ],
-                          x: 30, y: 5 });
+                          x: 20, y: 1 });
 
       requestAnimationFrame(gameLoop);
     });
