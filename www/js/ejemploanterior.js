@@ -55,29 +55,10 @@
       }
       this.context.restore();
     }
-  };
+  }
 
 
-  Physics.prototype.click = function(callback) {
-    var self = this;
 
-    function handleClick(e) {
-      e.preventDefault();
-      var point = {
-            x: (e.offsetX || e.layerX) / self.scale,
-            y: (e.offsetY || e.layerY) / self.scale
-          };
-
-      self.world.QueryPoint(function(fixture) {
-        callback(fixture.GetBody(),
-                 fixture,
-                 point);
-      },point);
-    }
-
-    this.element.addEventListener("click",handleClick);
-    this.element.addEventListener("touchstart",handleClick);
-  };
 
   var Body = window.Body = function(physics,details) {
     this.details = details = details || {};
@@ -230,20 +211,18 @@
       new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 50,  width: 0.5 });
       new Body(physics, { color: "red", type: "static", x:51, y: 0, height: 50,  width: 0.5});
       new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 0.5, width: 120 });
-      new Body(physics, { color: "red", type: "static", x: 0, y:25, height: 0.5, width: 120 });
+      new Body(physics, { color: "red", type: "static", x: 15, y:13, height: 0.5, width: 1 });
+      new Body(physics, { color: "red", shape: "polygon", type:"static",
+                          points: [ { x: 0, y: 0 }, { x: 0, y: 4 },{ x: -10, y: 0 }, { x: -8, y: -5 }   ],
+                          x: 10, y: 20 });
 
-      new Body(physics, { image: img, x: 5, y: 8 });
-      new Body(physics, { image: img, x: 13, y: 8 });
-      new Body(physics, { color: "blue", x: 8, y: 3 });
-      new Body(physics, { color: "gray", shape: "circle", radius: 4, x: 5, y: 20 });
+      new Body(physics, { image: img, x: 5, y: 10 });
+      new Body(physics, { image: img, x: 13, y: 0 });
+      new Body(physics, { color: "gray", shape: "circle", radius: 1, x: 5, y: 5 });
 
       new Body(physics, { color: "pink", shape: "polygon", 
                           points: [ { x: 0, y: 0 }, { x: 0, y: 4 },{ x: -10, y: 0 }   ],
-                          x: 20, y: 5 });
-
-      physics.click(function(body) {
-        body.ApplyImpulse({ x: 1000, y: -1000 }, body.GetWorldCenter());
-      });
+                          x: 20, y: 1 });
 
       requestAnimationFrame(gameLoop);
     });
@@ -285,3 +264,4 @@
         };
     }
 }());
+
