@@ -40,8 +40,8 @@
     while(this.dtRemaining > this.stepAmount) {
       this.dtRemaining -= this.stepAmount;
       this.world.Step(this.stepAmount, 
-                      10, // velocity iterations
-                      10);// position iterations
+                      8, // velocity iterations
+                      3);// position iterations
     }
     if(this.debugDraw) {
       this.world.DrawDebugData();
@@ -153,8 +153,8 @@
 
   Body.prototype.defaults = {
     shape: "block",
-    width: 6,
-    height: 6,
+    width: 1.5,
+    height: 1.5,
     radius: 1
   };
 
@@ -257,17 +257,22 @@
       physics = window.physics = new Physics(document.getElementById("b2dCanvas"));
 
       // Create some walls
-      new Body(physics, { color: "red", type: "static", shape: "polygon", 
-                          points: [ { x: 0, y: 0 }, { x: 0, y: 4 },{ x: -10, y: 0 } ,{ x: -10, y: -4}  ],
-                          x: 10, y: 15 });
-
                                 
       new Body(physics, { color: "blue", type: "static", shape: "polygon", 
-                          points: [ {x : 7, y : 1},{x : 6, y : 1},{x : 5, y : 1},{x : 5, y : 3}],
-                          x: 10, y: 10 });
+                          points: [{x : 0, y : 0},{x : 8.25, y : 0.4},{x : 8.95, y : 10.75},{x : 0, y : 10.85}],
+                          x: 0, y: 5 });
+      
+       new Body(physics, { color: "red", type: "static", shape: "polygon", 
+                          points: [{x : 24, y : 0.2},{x : 23.85, y : 5.3},{x : 15.3, y : 5.35},{x : 15.3, y : 0} ],
+                          x: -5, y: 5 });
+       
+       new Body(physics, { color: "red", type: "static", shape: "polygon", 
+                          points: [ {x : 23.95, y : 5.35},{x : 23.95, y : 7.85},{x : 13.45, y : 8.3},{x : 15.15, y : 5.15} ],
+                          x: -5, y: 6 });
+                                           
                                                 
                           
-      new Body(physics, { image: img, x: 8, y: 0 });
+      new Body(physics, { image: img, x: 9, y: 0 });
       
 
       
