@@ -130,10 +130,11 @@
          bodyB = contact.GetFixtureB().GetBody().GetUserData();
 
      if(bodyA.contact) { bodyA.contact(contact,impulse,true) }
-     if(bodyB.contact) {
-          window.document.getElementById('final').innerHTML='FIN';
+     if(bodyB.contact){
+         // window.document.getElementById('final').innerHTML='FIN';
           bodyB.contact(contact,impulse,false);
           //AQUI ES EL GAME OVER!!!
+		  $('#gameover').fadeIn();
      }
 
    };
@@ -311,6 +312,7 @@
   }
   
   function arriba(){
+    console.log("arriba");
     elcubo.ApplyImpulse({ x: 0, y: -60 }, elcubo.GetWorldCenter());
   }
   
@@ -319,7 +321,8 @@
     //agrego un click al div    
     var img = new Image();
     var img2 = new Image();
-    
+    var img3 = new Image();
+    var img4 = new Image();
 
 
     // Wait for the image to load
@@ -367,7 +370,7 @@ new Body(physics, {  type: "static", shape: "polygon", points: [{x : 9.4, y : 33
 new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y : 37.25},{x : 11.8, y : 38.8},{x : 0.45, y : 38.95},], x : 0, Y : 38.95});
                                                 
       //el chip ese                    
-      var body= new Body(physics, { image: img, x: 13.5, y: 0 });
+      var body= new Body(physics, { image: img, x: 13.5, y: -2 });
       //contact del chip
        //body contact
        body.contact = function(contact,impulse,first) {
@@ -375,23 +378,23 @@ new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y :
      };
       
       
+	 pos1=8.5+(Math.random()*4);
+	   pos2=8.5+(Math.random()*4);
+	   pos3=8.5+(Math.random()*4);
+	   pos4=8.5+(Math.random()*4);
+	   pos5=9+(Math.random()*4);
       
-      setTimeout(function(){
-            pos1=8.5+(Math.random()*3);
-            pos2=8.5+(Math.random()*3);
-            pos3=8.5+(Math.random()*3);
-            new Body(physics, { shape:"circle", image:img2, x: pos1, y: 0, width:0.8, height:0.8, radius:0.5});
-            new Body(physics, { shape:"circle",image:img2, x: pos2, y: 0, width:0.8, height:0.8, radius:0.5 });
-            new Body(physics, { shape:"circle",image:img2, x: pos3, y: 0, width:0.8, height:0.8, radius:0.5 });
-        },2200);
-      
-   
-      
-     
+	setTimeout(function(){
+		new Body(physics, { image:img2, x: pos1, y: -0.5, width:0.8, height:0.8});
+		new Body(physics, { image:img3, x: pos2, y: -0.7, width:0.8, height:0.8 });
+		new Body(physics, { image:img4, x: pos3, y: -0.2, width:0.8, height:0.8 });
+		new Body(physics, { image:img2, x: pos4, y: 0, width:0.8, height:0.8 });
+		new Body(physics, { image:img3, x: pos5, y: -0.1, width:0.8, height:0.8 });
+		},2200);
       
       
       physics.click(function(body1) {
-        body1.ApplyImpulse({ x: 0, y: -5000 }, body1.GetWorldCenter());
+        body1.ApplyImpulse({ x: 0, y: -80 }, body1.GetWorldCenter());
       });
 
       requestAnimationFrame(gameLoop);
@@ -399,6 +402,8 @@ new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y :
 
     img.src = "img/chip.png";
     img2.src = "img/enemigo.png";
+    img3.src = "img/enemigocuerpo1.gif";
+    img4.src = "img/enemigocuerpo2.gif";
     
   }
 
