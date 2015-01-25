@@ -11,7 +11,7 @@
   var b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
   var mystep = 1/60;
   var gameOver = 0;
-
+var yagane = 0;
 
   var Physics = window.Physics = function(element,scale) {
     var gravity = new b2Vec2(0,9.8);
@@ -110,6 +110,7 @@
 		 
 		if(gameOver == 0){
 			$('#success').fadeIn();
+			yagane = 1;
 			}
      }
       this.context.restore();
@@ -347,10 +348,12 @@
   }
   
 function GameOver(){
-	var audio = new Audio('crunchy.ogg');
-	audio.play();
-	$('#gameover').fadeIn();
-	gameOver = 1;
+	if(yagane == 0){
+		var audio = new Audio('crunchy.ogg');
+		audio.play();
+		$('#gameover').fadeIn();
+		gameOver = 1;
+		}
 	}
   
   function init() {
