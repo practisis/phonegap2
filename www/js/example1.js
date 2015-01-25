@@ -368,7 +368,7 @@ new Body(physics, {  type: "static", shape: "polygon", points: [{x : 9.4, y : 33
 new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y : 37.25},{x : 11.8, y : 38.8},{x : 0.45, y : 38.95},], x : 0, Y : 38.95});
                                                 
       //el chip ese                    
-      var body= new Body(physics, { image: img, x: 14.5, y: 0 });
+      var body= new Body(physics, { image: img, x: 13.5, y: 0 });
       //contact del chip
        //body contact
        body.contact = function(contact,impulse,first) {
@@ -378,14 +378,12 @@ new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y :
       
       
       setTimeout(function(){
-            pos1=8.5+(Math.random()*2);
-            pos2=8.5+(Math.random()*2);
-            pos3=9.1;
-            pos4=9.3;
-            new Body(physics, { image:img2, x: pos1, y: 0, width:0.8, height:0.8});
-            new Body(physics, { image:img2, x: pos2, y: 0, width:0.8, height:0.8 });
-            new Body(physics, { image:img2, x: pos3, y: 0, width:0.8, height:0.8 });
-            new Body(physics, { image:img2, x: pos4, y: 0, width:0.8, height:0.8 });
+            pos1=8.5+(Math.random()*3);
+            pos2=8.5+(Math.random()*3);
+            pos3=8.5+(Math.random()*3);
+            new Body(physics, { shape:"circle", image:img2, x: pos1, y: 0, width:0.8, height:0.8, radius:0.5});
+            new Body(physics, { shape:"circle",image:img2, x: pos2, y: 0, width:0.8, height:0.8, radius:0.5 });
+            new Body(physics, { shape:"circle",image:img2, x: pos3, y: 0, width:0.8, height:0.8, radius:0.5 });
         },2200);
       
    
