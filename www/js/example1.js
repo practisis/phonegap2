@@ -378,19 +378,24 @@ new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y :
       
       
       setTimeout(function(){
-            new Body(physics, { image:img2, x: 8.8, y: 0, width:0.8, height:0.8});
-            new Body(physics, { image:img2, x: 9, y: 0, width:0.8, height:0.8 });
-            new Body(physics, { image:img2, x: 8.9, y: 0, width:0.8, height:0.8 });
-            new Body(physics, { image:img2, x: 8.6, y: 0, width:0.8, height:0.8 });
-            new Body(physics, { image:img2, x: 10, y: 0, width:0.8, height:0.8 });
+            pos1=8.5+(Math.random()*2);
+            pos2=8.5+(Math.random()*2);
+            pos3=8.5+(Math.random()*2);
+            pos4=8.5+(Math.random()*2);
+            pos5=8.5+(Math.random()*2);
+            new Body(physics, { image:img2, x: pos1, y: 0, width:0.8, height:0.8});
+            new Body(physics, { image:img2, x: pos2, y: 0, width:0.8, height:0.8 });
+            new Body(physics, { image:img2, x: pos3, y: 0, width:0.8, height:0.8 });
+            new Body(physics, { image:img2, x: pos4, y: 0, width:0.8, height:0.8 });
+            new Body(physics, { image:img2, x: pos5, y: 0, width:0.8, height:0.8 });
         },1600);
       
          setTimeout(function(){
-            new Body(physics, { image:img2, x: 9, y: 0, width:0.8, height:0.8});
-            new Body(physics, { image:img2, x: 9, y: 0, width:0.8, height:0.8 });
+            new Body(physics, { image:img2, x: 9.5, y: 0, width:0.8, height:0.8});
+            new Body(physics, { image:img2, x: 9, y: -1, width:0.8, height:0.8 });
             new Body(physics, { image:img2, x: 8.9, y: 0, width:0.8, height:0.8 });
-            new Body(physics, { image:img2, x: 8.8, y: 0, width:0.8, height:0.8 });
-            new Body(physics, { image:img2, x: 9, y: 0, width:0.8, height:0.8 });
+            new Body(physics, { image:img2, x: 8.8, y: -1, width:0.8, height:0.8 });
+            new Body(physics, { image:img2, x: 8, y: 0, width:0.8, height:0.8 });
         },2000);
       
      
