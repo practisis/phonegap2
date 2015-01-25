@@ -390,13 +390,7 @@ new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y :
             new Body(physics, { image:img2, x: pos5, y: 0, width:0.8, height:0.8 });
         },1600);
       
-         setTimeout(function(){
-            new Body(physics, { image:img2, x: 9.5, y: 0, width:0.8, height:0.8});
-            new Body(physics, { image:img2, x: 9, y: -1, width:0.8, height:0.8 });
-            new Body(physics, { image:img2, x: 8.9, y: 0, width:0.8, height:0.8 });
-            new Body(physics, { image:img2, x: 8.8, y: -1, width:0.8, height:0.8 });
-            new Body(physics, { image:img2, x: 8, y: 0, width:0.8, height:0.8 });
-        },2000);
+   
       
      
       
