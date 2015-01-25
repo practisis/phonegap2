@@ -19,9 +19,6 @@
     this.scale = scale || 20;
     this.dtRemaining = 0;
     this.stepAmount = 1/60;
-    
-
-    
   };
 
   Physics.prototype.debug = function() {
@@ -124,6 +121,26 @@
     this.element.addEventListener("touchstart",handleClick);
   };
 
+  
+  //collision
+   Physics.prototype.collision = function() {
+   this.listener = new Box2D.Dynamics.b2ContactListener();
+   this.listener.PostSolve = function(contact,impulse) {
+     var bodyA = contact.GetFixtureA().GetBody().GetUserData(),
+         bodyB = contact.GetFixtureB().GetBody().GetUserData();
+
+     if(bodyA.contact) { bodyA.contact(contact,impulse,true) }
+     if(bodyB.contact) {
+          window.document.getElementById('final').innerHTML='FIN';
+          bodyB.contact(contact,impulse,false);
+          //AQUI ES EL GAME OVER!!!
+     }
+
+   };
+   this.world.SetContactListener(this.listener);
+ };
+  
+  
   var Body = window.Body = function(physics,details) {
     this.details = details = details || {};
 
@@ -178,8 +195,8 @@
 
   Body.prototype.defaults = {
     shape: "block",
-    width: 0.8,
-    height: 0.8,
+    width: 1.3,
+    height: 1.3,
     radius: 1
   };
 
@@ -269,39 +286,40 @@
   }
   
    function pujaizquierda1(){
-    elcubo.ApplyImpulse({ x: -5, y: 0 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: -2, y: 0 }, elcubo.GetWorldCenter());
   }
   
    function pujaizquierda2(){
-    elcubo.ApplyImpulse({ x: -10, y: 0 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: -4, y: 0 }, elcubo.GetWorldCenter());
   }
   
   function pujaizquierda3(){
-    elcubo.ApplyImpulse({ x: -15, y: 0 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: -6, y: 0 }, elcubo.GetWorldCenter());
   }
   
     function pujaderecha(){
     elcubo.ApplyImpulse({ x: 80, y: 0 }, elcubo.GetWorldCenter());
   }
       function pujaderecha1(){
-    elcubo.ApplyImpulse({ x: 5, y: 0 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: 2, y: 0 }, elcubo.GetWorldCenter());
   }
       function pujaderecha2(){
-    elcubo.ApplyImpulse({ x: 10, y: 0 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: 4, y: 0 }, elcubo.GetWorldCenter());
   }
       function pujaderecha3(){
-    elcubo.ApplyImpulse({ x: 15, y: 0 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: 6, y: 0 }, elcubo.GetWorldCenter());
   }
   
   function arriba(){
     console.log("arriba");
-    elcubo.ApplyImpulse({ x: 0, y: -30 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: 0, y: -15 }, elcubo.GetWorldCenter());
   }
   
   function init() {
 
     //agrego un click al div    
     var img = new Image();
+    var img2 = new Image();
     
 
 
@@ -310,6 +328,9 @@
 
       physics = window.physics = new Physics(document.getElementById("b2dCanvas"));
 
+      physics.collision();
+      
+      
       // Create some walls
       new Body(physics, {  type: "static", shape: "polygon", points: [{x : 24, y : 0.25},{x : 24, y : 5.35},{x : 15.25, y : 5.3},{x : 15.25, y : 0.2},], x : 0, Y : 5.35});
 new Body(physics, {  type: "static", shape: "polygon", points: [{x : 23.95, y : 5.45},{x : 24, y : 8.45},{x : 13.6, y : 8.2},{x : 15.15, y : 5.35},], x : 0, Y : 8.45});
@@ -328,26 +349,52 @@ new Body(physics, {  type: "static", shape: "polygon", points: [{x : 24, y : 35.
 new Body(physics, {  type: "static", shape: "polygon", points: [{x : 23.95, y : 37.45},{x : 24, y : 38.9},{x : 15.4, y : 38.9},{x : 15.3, y : 37.25},], x : 0, Y : 38.9});
 
 
-new Body(physics, {  type: "static", shape: "polygon", points: [{x : 8.25, y : 0.25},{x : 8.25, y : 5.15},{x : 0.15, y : 5.2},], x : 0, Y : 5.2});
+new Body(physics, {   type: "static", shape: "polygon", points: [{x : 8.25, y : 0.25},{x : 8.25, y : 5.15},{x : 0.15, y : 5.2},], x : 0, Y : 5.2});
 new Body(physics, {  type: "static", shape: "polygon", points: [{x : 8.25, y : 5.2},{x : 8.95, y : 10.75},{x : 0.1, y : 10.6},], x : 0, Y : 10.75});
-new Body(physics, {  type: "static", shape: "polygon", points: [{x : 8.95, y : 10.7},{x : 10.45, y : 12.8},{x : 0.25, y : 13.3},], x : 0, Y : 13.3});
-new Body(physics, {  type: "static", shape: "polygon", points: [{x : 10.45, y : 12.85},{x : 11.05, y : 14.45},{x : 0.3, y : 15.55},], x : 0, Y : 15.55});
-new Body(physics, {  type: "static", shape: "polygon", points: [{x : 13.3, y : 16.3},{x : 0.15, y : 16.4},{x : 12.3, y : 14.4}], x : -1, Y : 16.4});
-new Body(physics, {  type: "static", shape: "polygon", points: [{x : 12.25, y : 16.1},{x : 14.95, y : 18.55},{x : 0.45, y : 18.25},], x : 0, Y : 18.55});
-new Body(physics, {  type: "static", shape: "polygon", points: [{x : 14.95, y : 18.65},{x : 15.75, y : 20.75},{x : 0.15, y : 20.8},], x : 0, Y : 20.8});
-new Body(physics, {  type: "static", shape: "polygon", points: [{x : 15.5, y : 20.8},{x : 15.2, y : 22.3},{x : 0.3, y : 22.25},], x : 0, Y : 22.3});
-new Body(physics, {  type: "static", shape: "polygon", points: [{x : 15.1, y : 22.25},{x : 13.95, y : 23.35},{x : 0.4, y : 23.15},], x : 0, Y : 23.35});
-new Body(physics, {  type: "static", shape: "polygon", points: [{x : 13.75, y : 23.3},{x : 12.25, y : 23.5},{x : 0.45, y : 23.5},], x : 0, Y : 23.5});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 8.95, y : 10.7},{x : 9.75, y : 12.8},{x : 0.25, y : 13.3},], x : 0, Y : 13.3});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 9.85, y : 12.85},{x : 10.55, y : 14.45},{x : 0.3, y : 15.55},], x : 0, Y : 15.55});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 13.1, y : 16.3},{x : 0.15, y : 16.4},{x : 11.5, y : 14.4}], x : -1, Y : 16.4});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 12, y : 16.1},{x : 13.85, y : 18.55},{x : 0.45, y : 18.25},], x : 0, Y : 18.55});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 13.95, y : 18.65},{x : 14.5, y : 20.45},{x : 0.15, y : 20.8},], x : 0, Y : 20.8});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 14.5, y : 20.0},{x : 13.9, y : 22.3},{x : 0.3, y : 22.25},], x : 0, Y : 22.3});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 14.0, y : 22.25},{x : 12.25, y : 23.35},{x : 0.4, y : 23.15},], x : 0, Y : 23.35});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 12.50, y : 23.3},{x : 11.5, y : 23.9},{x : 0.45, y : 23.5},], x : 0, Y : 23.5});
 new Body(physics, {  type: "static", shape: "polygon", points: [{x : 12, y : 23.6},{x : 10.75, y : 24.4},{x : 0.25, y : 24.35},], x : 0, Y : 24.4});
 new Body(physics, {  type: "static", shape: "polygon", points: [{x : 10.6, y : 24.55},{x : 9.6, y : 26.5},{x : 0.3, y : 26.75},], x : 0, Y : 26.75});
 new Body(physics, {  type: "static", shape: "polygon", points: [{x : 9.4, y : 26.6},{x : 8.5, y : 28.6},{x : 0.4, y : 28.7},], x : 0, Y : 28.7});
 new Body(physics, {  type: "static", shape: "polygon", points: [{x : 8.55, y : 28.7},{x : 8.5, y : 30.85},{x : 0.25, y : 31},], x : 0, Y : 31});
 new Body(physics, {  type: "static", shape: "polygon", points: [{x : 8.4, y : 30.95},{x : 9.3, y : 33.2},{x : 0.1, y : 32.95},], x : 0, Y : 33.2});
 new Body(physics, {  type: "static", shape: "polygon", points: [{x : 9.4, y : 33.35},{x : 11.8, y : 37.15},{x : 0.25, y : 37.15},], x : 0, Y : 37.15});
-new Body(physics, {  type: "static", shape: "polygon", points: [{x : 11.8, y : 37.25},{x : 11.8, y : 38.8},{x : 0.45, y : 38.95},], x : 0, Y : 38.95});
+new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y : 37.25},{x : 11.8, y : 38.8},{x : 0.45, y : 38.95},], x : 0, Y : 38.95});
                                                 
       //el chip ese                    
-      new Body(physics, { image: img, x: 9, y: 0 });
+      var body= new Body(physics, { image: img, x: 14.5, y: 0 });
+      //contact del chip
+       //body contact
+       body.contact = function(contact,impulse,first) {
+        //posiblemente aqui tambien se chocan los objetos.
+     };
+      
+      
+      
+      setTimeout(function(){
+            new Body(physics, { image:img2, x: 8.8, y: 0, width:0.8, height:0.8});
+            new Body(physics, { image:img2, x: 9, y: 0, width:0.8, height:0.8 });
+            new Body(physics, { image:img2, x: 8.9, y: 0, width:0.8, height:0.8 });
+            new Body(physics, { image:img2, x: 8.6, y: 0, width:0.8, height:0.8 });
+            new Body(physics, { image:img2, x: 10, y: 0, width:0.8, height:0.8 });
+        },1600);
+      
+         setTimeout(function(){
+            new Body(physics, { image:img2, x: 9, y: 0, width:0.8, height:0.8});
+            new Body(physics, { image:img2, x: 9, y: 0, width:0.8, height:0.8 });
+            new Body(physics, { image:img2, x: 8.9, y: 0, width:0.8, height:0.8 });
+            new Body(physics, { image:img2, x: 8.8, y: 0, width:0.8, height:0.8 });
+            new Body(physics, { image:img2, x: 9, y: 0, width:0.8, height:0.8 });
+        },2000);
+      
+     
+      
       
       physics.click(function(body1) {
         body1.ApplyImpulse({ x: 0, y: -80 }, body1.GetWorldCenter());
@@ -356,7 +403,9 @@ new Body(physics, {  type: "static", shape: "polygon", points: [{x : 11.8, y : 3
       requestAnimationFrame(gameLoop);
     });
 
-    img.src = "img/cube.png";
+    img.src = "img/chip.png";
+    img2.src = "img/enemigo.png";
+    
   }
 
   window.addEventListener("load",init);  
