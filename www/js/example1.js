@@ -19,6 +19,9 @@
     this.scale = scale || 20;
     this.dtRemaining = 0;
     this.stepAmount = 1/60;
+    
+
+    
   };
 
   Physics.prototype.debug = function() {
@@ -40,8 +43,8 @@
     while(this.dtRemaining > this.stepAmount) {
       this.dtRemaining -= this.stepAmount;
       this.world.Step(this.stepAmount, 
-                      8, // velocity iterations
-                      3);// position iterations
+                      10, // velocity iterations
+                      10);// position iterations
     }
     if(this.debugDraw) {
       this.world.DrawDebugData();
@@ -175,8 +178,8 @@
 
   Body.prototype.defaults = {
     shape: "block",
-    width: 1.5,
-    height: 1.5,
+    width: 0.8,
+    height: 0.8,
     radius: 1
   };
 
@@ -266,37 +269,41 @@
   }
   
    function pujaizquierda1(){
-    elcubo.ApplyImpulse({ x: -10, y: 0 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: -5, y: 0 }, elcubo.GetWorldCenter());
   }
   
    function pujaizquierda2(){
-    elcubo.ApplyImpulse({ x: -20, y: 0 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: -10, y: 0 }, elcubo.GetWorldCenter());
   }
   
   function pujaizquierda3(){
-    elcubo.ApplyImpulse({ x: -30, y: 0 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: -15, y: 0 }, elcubo.GetWorldCenter());
   }
   
     function pujaderecha(){
     elcubo.ApplyImpulse({ x: 80, y: 0 }, elcubo.GetWorldCenter());
   }
       function pujaderecha1(){
-    elcubo.ApplyImpulse({ x: 10, y: 0 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: 5, y: 0 }, elcubo.GetWorldCenter());
   }
       function pujaderecha2(){
-    elcubo.ApplyImpulse({ x: 20, y: 0 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: 10, y: 0 }, elcubo.GetWorldCenter());
   }
       function pujaderecha3(){
-    elcubo.ApplyImpulse({ x: 30, y: 0 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: 15, y: 0 }, elcubo.GetWorldCenter());
+  }
+  
+  function arriba(){
+    console.log("arriba");
+    elcubo.ApplyImpulse({ x: 0, y: -30 }, elcubo.GetWorldCenter());
   }
   
   function init() {
-    //agrego un click al div
-    document.getElementById("mibotonizq").addEventListener("click", pujaizquierda, false);
-    document.getElementById("mibotonder").addEventListener("click", pujaderecha, false);
-    //agrego un click al div
-    
+
+    //agrego un click al div    
     var img = new Image();
+    
+
 
     // Wait for the image to load
     img.addEventListener("load", function() {
@@ -304,40 +311,40 @@
       physics = window.physics = new Physics(document.getElementById("b2dCanvas"));
 
       // Create some walls
-      new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 24, y : 0.25},{x : 24, y : 5.35},{x : 15.25, y : 5.3},{x : 15.25, y : 0.2},], x : 0, Y : 5.35});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 23.95, y : 5.45},{x : 24, y : 8.45},{x : 13.6, y : 8.2},{x : 15.15, y : 5.35},], x : 0, Y : 8.45});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 24.1, y : 10.85},{x : 13.75, y : 10.6},{x : 13.5, y : 8.35},], x : 0, Y : 10.85});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 23.95, y : 11.05},{x : 24, y : 14.05},{x : 13.15, y : 13.55},{x : 13.9, y : 10.7},], x : 0, Y : 14.05});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 23.95, y : 14.15},{x : 24, y : 17.2},{x : 15.6, y : 17.2},{x : 13.2, y : 13.6},], x : 0, Y : 17.2});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 24, y : 17.35},{x : 23.95, y : 19.7},{x : 16.6, y : 19.7},{x : 15.7, y : 17.2},], x : 0, Y : 19.7});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 24, y : 19.85},{x : 24.1, y : 21.5},{x : 16.6, y : 21.35},{x : 16.65, y : 19.7},], x : 0, Y : 21.5});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 23.95, y : 21.55},{x : 24, y : 23.15},{x : 15.9, y : 23.3},{x : 16.65, y : 21.35},], x : 0, Y : 23.3});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 24, y : 23.2},{x : 24, y : 26.9},{x : 12.75, y : 26.45},{x : 15.75, y : 23.3},], x : 0, Y : 26.9});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 24, y : 27.05},{x : 12, y : 29},{x : 12.9, y : 26.5},], x : 0, Y : 29});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 23.95, y : 27.2},{x : 23.85, y : 30.85},{x : 11.95, y : 30.7},{x : 12, y : 29.15},], x : 0, Y : 30.85});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 23.8, y : 31.1},{x : 23.95, y : 33.35},{x : 12.55, y : 32.8},{x : 11.85, y : 30.85},], x : 0, Y : 33.35});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 24, y : 33.55},{x : 24, y : 35.35},{x : 13.95, y : 35},{x : 12.7, y : 32.9},], x : 0, Y : 35.35});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 24, y : 35.5},{x : 24, y : 37.25},{x : 15.3, y : 37.1},{x : 14.05, y : 35.05},], x : 0, Y : 37.25});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 23.95, y : 37.45},{x : 24, y : 38.9},{x : 15.4, y : 38.9},{x : 15.3, y : 37.25},], x : 0, Y : 38.9});
+      new Body(physics, {  type: "static", shape: "polygon", points: [{x : 24, y : 0.25},{x : 24, y : 5.35},{x : 15.25, y : 5.3},{x : 15.25, y : 0.2},], x : 0, Y : 5.35});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 23.95, y : 5.45},{x : 24, y : 8.45},{x : 13.6, y : 8.2},{x : 15.15, y : 5.35},], x : 0, Y : 8.45});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 24.1, y : 10.85},{x : 13.75, y : 10.6},{x : 13.5, y : 8.35},], x : 0, Y : 10.85});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 23.95, y : 11.05},{x : 24, y : 14.05},{x : 13.15, y : 13.55},{x : 13.9, y : 10.7},], x : 0, Y : 14.05});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 23.95, y : 14.15},{x : 24, y : 17.2},{x : 15.6, y : 17.2},{x : 13.2, y : 13.6},], x : 0, Y : 17.2});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 24, y : 17.35},{x : 23.95, y : 19.7},{x : 16.6, y : 19.7},{x : 15.7, y : 17.2},], x : 0, Y : 19.7});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 24, y : 19.85},{x : 24.1, y : 21.5},{x : 16.6, y : 21.35},{x : 16.65, y : 19.7},], x : 0, Y : 21.5});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 23.95, y : 21.55},{x : 24, y : 23.15},{x : 15.9, y : 23.3},{x : 16.65, y : 21.35},], x : 0, Y : 23.3});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 24, y : 23.2},{x : 24, y : 26.9},{x : 12.75, y : 26.45},{x : 15.75, y : 23.3},], x : 0, Y : 26.9});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 24, y : 27.05},{x : 12, y : 29},{x : 12.9, y : 26.5},], x : 0, Y : 29});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 23.95, y : 27.2},{x : 23.85, y : 30.85},{x : 11.95, y : 30.7},{x : 12, y : 29.15},], x : 0, Y : 30.85});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 23.8, y : 31.1},{x : 23.95, y : 33.35},{x : 12.55, y : 32.8},{x : 11.85, y : 30.85},], x : 0, Y : 33.35});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 24, y : 33.55},{x : 24, y : 35.35},{x : 13.95, y : 35},{x : 12.7, y : 32.9},], x : 0, Y : 35.35});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 24, y : 35.5},{x : 24, y : 37.25},{x : 15.3, y : 37.1},{x : 14.05, y : 35.05},], x : 0, Y : 37.25});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 23.95, y : 37.45},{x : 24, y : 38.9},{x : 15.4, y : 38.9},{x : 15.3, y : 37.25},], x : 0, Y : 38.9});
 
 
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 8.25, y : 0.25},{x : 8.25, y : 5.15},{x : 0.15, y : 5.2},], x : -1, Y : 5.2});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 8.25, y : 5.2},{x : 8.95, y : 10.75},{x : 0.1, y : 10.6},], x : -1, Y : 10.75});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 8.95, y : 10.7},{x : 10.45, y : 12.8},{x : 0.25, y : 13.3},], x : -1, Y : 13.3});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 10.45, y : 12.85},{x : 11.05, y : 14.45},{x : 0.3, y : 15.55},], x : -1, Y : 15.55});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 12.3, y : 16.3},{x : 0.15, y : 16.4},], x : -1, Y : 16.4});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 12.25, y : 16.1},{x : 14.95, y : 18.55},{x : 0.45, y : 18.25},], x : -1, Y : 18.55});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 14.95, y : 18.65},{x : 15.75, y : 20.75},{x : 0.15, y : 20.8},], x : -1, Y : 20.8});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 15.7, y : 20.8},{x : 15.4, y : 22.3},{x : 0.3, y : 22.25},], x : -1, Y : 22.3});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 15.1, y : 22.25},{x : 13.95, y : 23.35},{x : 0.4, y : 23.15},], x : -1, Y : 23.35});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 13.75, y : 23.3},{x : 12.25, y : 23.5},{x : 0.45, y : 23.5},], x : -1, Y : 23.5});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 12, y : 23.6},{x : 10.75, y : 24.4},{x : 0.25, y : 24.35},], x : -1, Y : 24.4});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 10.6, y : 24.55},{x : 9.6, y : 26.5},{x : 0.3, y : 26.75},], x : -1, Y : 26.75});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 9.4, y : 26.6},{x : 8.5, y : 28.6},{x : 0.4, y : 28.7},], x : -1, Y : 28.7});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 8.55, y : 28.7},{x : 8.5, y : 30.85},{x : 0.25, y : 31},], x : -1, Y : 31});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 8.4, y : 30.95},{x : 9.3, y : 33.2},{x : 0.1, y : 32.95},], x : -1, Y : 33.2});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 9.4, y : 33.35},{x : 11.8, y : 37.15},{x : 0.25, y : 37.15},], x : -1, Y : 37.15});
-new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x : 11.8, y : 37.25},{x : 11.8, y : 38.8},{x : 0.45, y : 38.95},], x : -1, Y : 38.95});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 8.25, y : 0.25},{x : 8.25, y : 5.15},{x : 0.15, y : 5.2},], x : 0, Y : 5.2});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 8.25, y : 5.2},{x : 8.95, y : 10.75},{x : 0.1, y : 10.6},], x : 0, Y : 10.75});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 8.95, y : 10.7},{x : 10.45, y : 12.8},{x : 0.25, y : 13.3},], x : 0, Y : 13.3});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 10.45, y : 12.85},{x : 11.05, y : 14.45},{x : 0.3, y : 15.55},], x : 0, Y : 15.55});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 13.3, y : 16.3},{x : 0.15, y : 16.4},{x : 12.3, y : 14.4}], x : -1, Y : 16.4});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 12.25, y : 16.1},{x : 14.95, y : 18.55},{x : 0.45, y : 18.25},], x : 0, Y : 18.55});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 14.95, y : 18.65},{x : 15.75, y : 20.75},{x : 0.15, y : 20.8},], x : 0, Y : 20.8});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 15.5, y : 20.8},{x : 15.2, y : 22.3},{x : 0.3, y : 22.25},], x : 0, Y : 22.3});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 15.1, y : 22.25},{x : 13.95, y : 23.35},{x : 0.4, y : 23.15},], x : 0, Y : 23.35});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 13.75, y : 23.3},{x : 12.25, y : 23.5},{x : 0.45, y : 23.5},], x : 0, Y : 23.5});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 12, y : 23.6},{x : 10.75, y : 24.4},{x : 0.25, y : 24.35},], x : 0, Y : 24.4});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 10.6, y : 24.55},{x : 9.6, y : 26.5},{x : 0.3, y : 26.75},], x : 0, Y : 26.75});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 9.4, y : 26.6},{x : 8.5, y : 28.6},{x : 0.4, y : 28.7},], x : 0, Y : 28.7});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 8.55, y : 28.7},{x : 8.5, y : 30.85},{x : 0.25, y : 31},], x : 0, Y : 31});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 8.4, y : 30.95},{x : 9.3, y : 33.2},{x : 0.1, y : 32.95},], x : 0, Y : 33.2});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 9.4, y : 33.35},{x : 11.8, y : 37.15},{x : 0.25, y : 37.15},], x : 0, Y : 37.15});
+new Body(physics, {  type: "static", shape: "polygon", points: [{x : 11.8, y : 37.25},{x : 11.8, y : 38.8},{x : 0.45, y : 38.95},], x : 0, Y : 38.95});
                                                 
       //el chip ese                    
       new Body(physics, { image: img, x: 9, y: 0 });
@@ -353,7 +360,8 @@ new Body(physics, { color: "red", type: "static", shape: "polygon", points: [{x 
   }
 
   window.addEventListener("load",init);  
- 
+  window.addEventListener("click", arriba);
+   window.addEventListener("touchstart", arriba);
 }());
 
 
