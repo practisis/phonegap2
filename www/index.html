@@ -5,7 +5,6 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-<link rel="stylesheet" type="text/css" href="css/index.css" />
 <title>MicroShip</title>
 <script src="js/jquery.js"></script>
 <style type="text/css">
@@ -15,16 +14,15 @@ html,body{
 	font-family: Helvetica,Arial;
 	background-image: url('img/background.png');
 	}
-		
+	
 .main {
 	width: 480px;
-	height: 674px;
+	max-height: 780px; 
 	overflow: hidden;
 	}
 </style>
 <script>
 function irJuego(){
-	//$('.img').css('display','none');
 	$('#top').animate({
 		marginLeft : '-600px'
 		});
@@ -32,10 +30,14 @@ function irJuego(){
 	$('#mid').animate({
 		marginLeft : '600px'
 		});
+	
+	$('#mid').fadeOut();
 		
 	$('#bot').animate({
 		marginLeft : '-600px'
 		});
+		
+	$('#loadgame').fadeIn();
 		
 	setTimeout(function(){
 		location.href='gamestart.html';
@@ -44,23 +46,32 @@ function irJuego(){
 </script>
 </head>
 <body onload="triggerSounds();">
-<div class="main" style="text-align: center; padding: 0px; margin: 0px;">
-	<div id="main" class="contents" style="position: relative;">
-		<img src='img/top.png' border='0' class='img' id='top' style='position: absolute; top: 0px; width: 480px; display: block;' onclick='irJuego()'/>
-		<img src='img/mid.png' border='0' onclick="showSection('instructions'); return false;" class='img' id='mid' style='position: absolute; top: 353px; width: 480px; display: block;'/>
-		<img src='img/bot.png' border='0' onclick="showSection('whoAreWe'); return false;" class='img' id='bot' style='position: absolute; top: 480px; width: 480px; display: block;'/>
-		<br/>
-		<br/>
-		<img src='img/enemigocuerpo2.gif' border='0' id='loading'/>
-		<div style="font-size: 30px; color:  #000;  text-align: center; background: rgba(255,255,255,0.8);">Just a second, we're implanting the MicroShip into the Alien Mechanical Jellyfish.</div>
+	<div style="padding: 0px; margin: 0px; width: 480px;">
+		<div style="width: 480px; text-align: center; padding: 0px; margin: 0px;">
+			<div id="main" class="contents" style="position: relative; width: 480px;">
+				<img src='img/top.png' border='0' class='img' id='top' style='position: absolute; top: 0px; width: 480px; display: block;' onclick='irJuego()'/>
+				<img src='img/mid.png' border='0' onclick="showSection('instructions'); return false;" class='img' id='mid' style='position: absolute; top: 353px; width: 480px; display: block;'/>
+				<img src='img/bot.png' border='0' onclick="showSection('whoAreWe'); return false;" class='img' id='bot' style='position: absolute; top: 480px; width: 480px; display: block;'/>
+			</div>
+		</div>
+		
+		<div id="loadgame" style="position: relative; display: none; text-align: center;">
+			<br/>
+			<br/>
+			<img src='img/enemigocuerpo2.gif' border='0' id='loading'/>
+			<div style="font-size: 30px; color:  #000;  text-align: center; background: rgba(255,255,255,0.8);">Just a second, we're implanting the MicroShip into the Alien Mechanical Jellyfish.</div>
+		</div>
+		
+		<div id="whoAreWe" class="contents" onclick="showSection('main'); return false;" style="position: relative; display: none;">
+			<img alt="" src="img/credits.png"/>
+		</div>
+		
+		<div id="instructions" class="contents" onclick="showSection('main'); return false;" style="position: relative; display: none;">
+			<img alt="" src="img/instrucciones.png"/>
+		</div>
 	</div>
-	<div id="whoAreWe" class="contents" onclick="showSection('main'); return false;" style="position: relative; display: none; height: 650px;">
-		<img alt="" src="img/credits.png"/>
-	</div>
-	<div id="instructions" class="contents" onclick="showSection('main'); return false;" style="position: relative; display: none; height: 650px;">
-		<img alt="" src="img/instrucciones.png"/>
-	</div>
-</div>
+</body>
+</html> 
 
 <script type="text/javascript">
 function showSection(id){
@@ -73,6 +84,3 @@ function triggerSounds(){
 	audio.play();
 	}
 </script>
-
-</body>
-</html> 
