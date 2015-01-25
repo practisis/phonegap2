@@ -311,8 +311,7 @@
   }
   
   function arriba(){
-    console.log("arriba");
-    elcubo.ApplyImpulse({ x: 0, y: -15 }, elcubo.GetWorldCenter());
+    elcubo.ApplyImpulse({ x: 0, y: -60 }, elcubo.GetWorldCenter());
   }
   
   function init() {
@@ -392,7 +391,7 @@ new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y :
       
       
       physics.click(function(body1) {
-        body1.ApplyImpulse({ x: 0, y: -80 }, body1.GetWorldCenter());
+        body1.ApplyImpulse({ x: 0, y: -5000 }, body1.GetWorldCenter());
       });
 
       requestAnimationFrame(gameLoop);
