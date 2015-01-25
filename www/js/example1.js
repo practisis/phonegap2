@@ -96,7 +96,9 @@
 	  timer -= 1;
 	  if(timer <= 0){
 		timer = 0;
-		GameOver();
+		if(gameOver == 0){
+			GameOver();
+			}
 		}
 	  $('#timer').html(timer);
 	  
@@ -159,7 +161,10 @@
 		  // $('#gameover').fadeIn();
 		  // $('#getEaten')[0].play();
 		  // gameOver = 1;
-		  GameOver();
+		  if(gameOver == 0){
+			GameOver();
+			gameOver = 1;
+			}
      }
 
    };
@@ -342,11 +347,9 @@
   }
   
 function GameOver(){
-	var src = $('#getEaten')[0];
-	var media = new Media(src);
-	
+	var audio = new Audio('crunchy.ogg');
+	audio.play();
 	$('#gameover').fadeIn();
-	media.play();
 	gameOver = 1;
 	}
   
@@ -404,7 +407,7 @@ new Body(physics, {  type: "static", shape: "polygon", points: [{x : 9.4, y : 33
 new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y : 37.25},{x : 11.8, y : 38.8},{x : 0.45, y : 38.95},], x : 0, Y : 38.95});
                                                 
       //el chip ese                    
-      var body= new Body(physics, { image: img, x: 13.5, y: -2 });
+      var body= new Body(physics, { image: img, x: 13.5, y: -1 });
       //contact del chip
        //body contact
        body.contact = function(contact,impulse,first) {

@@ -43,20 +43,25 @@ function irJuego(){
 	}
 </script>
 </head>
-<body>
+<body onload="triggerSounds();">
 <div class="main" style="text-align: center; padding: 0px; margin: 0px;">
 	<div style="position: relative;">
-		<img src='img/top.png' border='0' class='img' id='top' style='position: absolute; top: 0px; width: 477px; display: block;' onclick='irJuego()'/>
-		<img src='img/mid.png' border='0' class='img' id='mid' style='position: absolute; top: 282px; width: 477px; display: block;'/>
-		<img src='img/bot.png' border='0' class='img' id='bot' style='position: absolute; top: 392px; width: 477px; display: block;'/>
+		<img src='img/top.png' border='0' class='img' id='top' style='position: absolute; top: 0px; width: 480px; display: block;' onclick='irJuego()'/>
+		<img src='img/mid.png' border='0' class='img' id='mid' style='position: absolute; top: 282px; width: 480px; display: block;'/>
+		<img src='img/bot.png' border='0' class='img' id='bot' style='position: absolute; top: 392px; width: 480px; display: block;'/>
 		<br/>
 		<br/>
 		<img src='img/enemigocuerpo2.gif' border='0' id='loading'/>
 		<div style="font-size: 30px; color:  #000;  text-align: center; background: rgba(255,255,255,0.8);">Just a second, we're implanting the MicroShip into the Alien Mechanical Jellyfish.</div>
 	</div>
 </div>
-<audio autoplay loop>
-	<source src="song.ogg" type="audio/ogg">
-</audio> 
+
+<script type="text/javascript">
+function triggerSounds(){
+	var audio = new Audio('song.ogg');
+	audio.play();
+	}
+</script>
+
 </body>
 </html> 
