@@ -9,6 +9,8 @@
   var b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape;
   var b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
   var b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
+  var mystep = 1/60;
+  var gameOver = 0;
 
 
   var Physics = window.Physics = function(element,scale) {
@@ -18,7 +20,7 @@
     this.context = element.getContext("2d");
     this.scale = scale || 20;
     this.dtRemaining = 0;
-    this.stepAmount = 1/60;
+    this.stepAmount = mystep;
   };
 
   Physics.prototype.debug = function() {
@@ -39,7 +41,7 @@
     this.dtRemaining += dt;
     while(this.dtRemaining > this.stepAmount) {
       this.dtRemaining -= this.stepAmount;
-      this.world.Step(this.stepAmount, 
+      this.world.Step(mystep, 
                       10, // velocity iterations
                       10);// position iterations
     }
@@ -90,6 +92,13 @@
       }
       //var nuevo = obj.GetUserData();
       //console.log(nuevo);
+	  if (elcubo.GetPosition().y>40){
+         mystep=0;
+		 
+		if(gameOver == 0){
+			$('#success').fadeIn();
+			}
+     }
       this.context.restore();
     }
   };
@@ -135,6 +144,8 @@
           bodyB.contact(contact,impulse,false);
           //AQUI ES EL GAME OVER!!!
 		  $('#gameover').fadeIn();
+		  $('#getEaten')[0].play();
+		  gameOver = 1;
      }
 
    };

@@ -14,6 +14,7 @@
 <style type="text/css">
 body {
 	font-family: sans-serif;
+	background-color: #000;
 	}
 
 canvas {
@@ -60,6 +61,9 @@ canvas {
 			</tr>
 		</table>
 	</div>
+	<div id="success" style="display: none; padding: 0px; position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: rgba(51,51,51,0.8);">
+		<a href="gamestart.html"><img id="levelcomplete" alt="" src="img/levelcomplete.png"/></a>
+	</div>
 	<canvas id="b2dCanvas" width="480" height="780"></canvas>
 </div>
 
@@ -73,6 +77,14 @@ canvas {
 </table>
 </body>
 </html>
+
+<audio id="getEaten">
+	<source src="crunchy.ogg" type="audio/ogg">
+</audio> 
+
+<audio autoplay loop>
+	<source src="latidosrapidos.ogg" type="audio/ogg">
+</audio> 
 
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>

@@ -1,42 +1,56 @@
 <!DOCTYPE html>
-	<html>
-		<head>
-			<title>MicroShip</title>
-			<script src="js/jquery.js"></script>
-			<style type="text/css">
-				html,body{
-					margin : 0px;
-					padding: 0px;
-					font-family: Helvetica,Arial;
-					}
-					
-				.main {
-					width: 477px;
-					margin-left:auto;
-					margin-right:auto;  
-					overflow:hidden;
-					height:674px;
-				}
-			</style>
-			<script>
-				function irJuego(){
-					$('.img').css('display','none');
-					setTimeout(function(){
-						location.href='gamestart.html';
-						},5000);
-					
-				}
-			</script>
-		</head>
-		<body>
-			<div class="main" style="text-align: center;">
-				<br/>
-				<br/>
-				<img src='img/top.png' border='0' class='img' id='top' style='position:relative;z-index:1;cursor:pointer;' onclick='irJuego()'/>
-				<img src='img/mid.png' border='0' class='img'id='mid' style='position:relative;z-index:2;margin-top:-5px;cursor:pointer;'/>
-				<img src='img/bot.png' border='0' class='img'id='bot' style='position:relative;z-index:3;margin-top:-5px;cursor:pointer;'/>
-				<img src='img/enemigocuerpo2.gif' border='0' id='loading'/>
-				<div style="font-size: 30px; text-align: center; color: #000;">Just a second, we're implanting the MicroShip into the Alien Mechanical Jellyfish.</div>
-			</div>
-		</body>
-	</html> 
+<html>
+<head>
+<title>MicroShip</title>
+<script src="js/jquery.js"></script>
+<style type="text/css">
+html,body{
+	margin : 0px;
+	padding: 0px;
+	font-family: Helvetica,Arial;
+	}
+		
+.main {
+	width: 480px;
+	height: 674px;
+	overflow: hidden;
+	}
+</style>
+<script>
+function irJuego(){
+	//$('.img').css('display','none');
+	$('#top').animate({
+		marginLeft : '-600px'
+		});
+		
+	$('#mid').animate({
+		marginLeft : '600px'
+		});
+		
+	$('#bot').animate({
+		marginLeft : '-600px'
+		});
+		
+	setTimeout(function(){
+		location.href='gamestart.html';
+		},5000);
+	}
+</script>
+</head>
+<body>
+<div class="main" style="text-align: center;">
+	<div style="position: relative;">
+		<img src='img/top.png' border='0' class='img' id='top' style='position: absolute; top: 0px; width: 477px; display: block;' onclick='irJuego()'/>
+		<img src='img/mid.png' border='0' class='img' id='mid' style='position: absolute; top: 282px; width: 477px; display: block;'/>
+		<img src='img/bot.png' border='0' class='img' id='bot' style='position: absolute; top: 392px; width: 477px; display: block;'/>
+		<br/>
+		<br/>
+		<img src='img/enemigocuerpo2.gif' border='0' id='loading'/>
+		<div style="font-size: 30px; text-align: center; color: #000;">Just a second, we're implanting the MicroShip into the Alien Mechanical Jellyfish.</div>
+	</div>
+</div>
+<audio autoplay loop>
+	<source src="song.ogg" type="audio/ogg">
+</audio> 
+</body>
+</html> 
