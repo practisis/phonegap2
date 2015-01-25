@@ -36,6 +36,7 @@
   
   var elcubo;
   var i=0;
+  var timer = 400;
   
   Physics.prototype.step = function(dt) {
     this.dtRemaining += dt;
@@ -90,6 +91,16 @@
         }
         obj = obj.GetNext();
       }
+	  
+	  
+	  timer -= 1;
+	  if(timer <= 0){
+		timer = 0;
+		GameOver();
+		}
+	  $('#timer').html(timer);
+	  
+	  
       //var nuevo = obj.GetUserData();
       //console.log(nuevo);
 	  if (elcubo.GetPosition().y>40){
@@ -101,9 +112,11 @@
      }
       this.context.restore();
     }
-  };
-
  
+	
+ };
+
+
 
   Physics.prototype.click = function(callback) {
     var self = this;
@@ -143,9 +156,10 @@
          // window.document.getElementById('final').innerHTML='FIN';
           bodyB.contact(contact,impulse,false);
           //AQUI ES EL GAME OVER!!!
-		  $('#gameover').fadeIn();
-		  $('#getEaten')[0].play();
-		  gameOver = 1;
+		  // $('#gameover').fadeIn();
+		  // $('#getEaten')[0].play();
+		  // gameOver = 1;
+		  GameOver();
      }
 
    };
@@ -327,6 +341,15 @@
     elcubo.ApplyImpulse({ x: 0, y: -60 }, elcubo.GetWorldCenter());
   }
   
+function GameOver(){
+	var src = $('#getEaten')[0];
+	var media = new Media(src);
+	
+	$('#gameover').fadeIn();
+	media.play();
+	gameOver = 1;
+	}
+  
   function init() {
 
     //agrego un click al div    
@@ -394,6 +417,7 @@ new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y :
 	   pos3=8.5+(Math.random()*4);
 	   pos4=8.5+(Math.random()*4);
 	   pos5=9+(Math.random()*4);
+	   pos6=9.5+(Math.random()*4);
       
 	setTimeout(function(){
 		new Body(physics, { image:img2, x: pos1, y: -0.5, width:0.8, height:0.8});
@@ -401,6 +425,7 @@ new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y :
 		new Body(physics, { image:img4, x: pos3, y: -0.2, width:0.8, height:0.8 });
 		new Body(physics, { image:img2, x: pos4, y: 0, width:0.8, height:0.8 });
 		new Body(physics, { image:img3, x: pos5, y: -0.1, width:0.8, height:0.8 });
+		new Body(physics, { image:img4, x: pos5, y: -0.3, width:0.8, height:0.8 });
 		},2200);
       
       
@@ -454,4 +479,3 @@ new Body(physics, {    type: "static", shape: "polygon", points: [{x : 11.8, y :
         };
     }
 }());
-
