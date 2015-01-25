@@ -47,18 +47,18 @@ function irJuego(){
 <div class="main" style="text-align: center; padding: 0px; margin: 0px;">
 	<div id="main" class="contents" style="position: relative;">
 		<img src='img/top.png' border='0' class='img' id='top' style='position: absolute; top: 0px; width: 480px; display: block;' onclick='irJuego()'/>
-		<img src='img/mid.png' border='0' nclick="showSection('instructions'); return false;" class='img' id='mid' style='position: absolute; top: 282px; width: 480px; display: block;'/>
-		<img src='img/bot.png' border='0' onclick="showSection('whoAreWe'); return false;" class='img' id='bot' style='position: absolute; top: 392px; width: 480px; display: block;'/>
+		<img src='img/mid.png' border='0' onclick="showSection('instructions'); return false;" class='img' id='mid' style='position: absolute; top: 353px; width: 480px; display: block;'/>
+		<img src='img/bot.png' border='0' onclick="showSection('whoAreWe'); return false;" class='img' id='bot' style='position: absolute; top: 480px; width: 480px; display: block;'/>
 		<br/>
 		<br/>
 		<img src='img/enemigocuerpo2.gif' border='0' id='loading'/>
 		<div style="font-size: 30px; color:  #000;  text-align: center; background: rgba(255,255,255,0.8);">Just a second, we're implanting the MicroShip into the Alien Mechanical Jellyfish.</div>
 	</div>
-	<div id="whoAreWe" class="contents" style="position: relative; display: none;">
+	<div id="whoAreWe" class="contents" onclick="showSection('main'); return false;" style="position: relative; display: none; height: 650px;">
 		<img alt="" src="img/credits.png"/>
 	</div>
-	<div id="instructions" class="contents" style="position: relative; display: none;">
-		<img alt="" src="img/credits.png"/>
+	<div id="instructions" class="contents" onclick="showSection('main'); return false;" style="position: relative; display: none; height: 650px;">
+		<img alt="" src="img/instrucciones.png"/>
 	</div>
 </div>
 
@@ -69,7 +69,7 @@ function showSection(id){
 	}
 
 function triggerSounds(){
-	var audio = new Audio('song.ogg');
+	var audio = new Audio('song.mp3');
 	audio.play();
 	}
 </script>

@@ -349,7 +349,7 @@ var yagane = 0;
   
 function GameOver(){
 	if(yagane == 0){
-		var audio = new Audio('crunchy.ogg');
+		var audio = new Audio('crunchy.mp3');
 		audio.play();
 		$('#gameover').fadeIn();
 		gameOver = 1;
